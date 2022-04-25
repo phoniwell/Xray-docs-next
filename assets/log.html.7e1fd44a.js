@@ -1,1 +1,0 @@
-const e={key:"v-f91d64d6",path:"/en/config/log.html",title:"\u65E5\u5FD7\u914D\u7F6E",lang:"en-US",frontmatter:{},excerpt:"",headers:[{level:2,title:"LogObject",slug:"logobject",children:[]}],git:{updatedTime:1622027153e3,contributors:[{name:"hmol233",email:"82594500+hmol233@users.noreply.github.com",commits:1}]},filePathRelative:"en/config/log.md"};export{e as data};
