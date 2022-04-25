@@ -1,0 +1,1 @@
+const t={key:"v-1c38292a",path:"/en/config/transports/h2.html",title:"HTTP/2",lang:"en-US",frontmatter:{},excerpt:"",headers:[{level:2,title:"HttpObject",slug:"httpobject",children:[]}],git:{updatedTime:1622027153e3,contributors:[{name:"hmol233",email:"82594500+hmol233@users.noreply.github.com",commits:1}]},filePathRelative:"en/config/transports/h2.md"};export{t as data};

@@ -1,0 +1,1 @@
+const e={key:"v-d190d938",path:"/en/config/features/xtls.html",title:"XTLS \u6DF1\u5EA6\u5256\u6790",lang:"en-US",frontmatter:{},excerpt:"",headers:[],git:{updatedTime:1622027153e3,contributors:[{name:"hmol233",email:"82594500+hmol233@users.noreply.github.com",commits:1}]},filePathRelative:"en/config/features/xtls.md"};export{e as data};
