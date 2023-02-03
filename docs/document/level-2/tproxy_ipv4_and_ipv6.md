@@ -473,7 +473,9 @@ iptables -t mangle -A XRAY -d 192.168.0.0/16 -p udp ! --dport 53 -j RETURN
 iptables -t mangle -A XRAY -j RETURN -m mark --mark 0xff
 iptables -t mangle -A XRAY -p udp -j TPROXY --on-ip 127.0.0.1 --on-port 12345 --tproxy-mark 1
 iptables -t mangle -A XRAY -p tcp -j TPROXY --on-ip 127.0.0.1 --on-port 12345 --tproxy-mark 1
-iptables -t mangle -A PREROUTING -j XRAY
+# to reduce strange traffic & lower opening files, you should add -i <LAN interface>. Here we use eth0.
+# add more interfaces as yours need. For example, you could add vpns+ for incoming vpn service.
+iptables -t mangle -A PREROUTING -i eth0 -j XRAY
 
 # 代理局域网设备 v6
 ip6tables -t mangle -N XRAY6
@@ -484,7 +486,8 @@ ip6tables -t mangle -A XRAY6 -d fd00::/8 -p udp ! --dport 53 -j RETURN
 ip6tables -t mangle -A XRAY6 -j RETURN -m mark --mark 0xff
 ip6tables -t mangle -A XRAY6 -p udp -j TPROXY --on-ip ::1 --on-port 12345 --tproxy-mark 1
 ip6tables -t mangle -A XRAY6 -p tcp -j TPROXY --on-ip ::1 --on-port 12345 --tproxy-mark 1
-ip6tables -t mangle -A PREROUTING -j XRAY6
+# same reason as v4
+ip6tables -t mangle -A PREROUTING -i eth0 XRAY6
 
 # 代理网关本机 v4
 iptables -t mangle -N XRAY_MASK
@@ -495,6 +498,7 @@ iptables -t mangle -A XRAY_MASK -d 192.168.0.0/16 -p udp ! --dport 53 -j RETURN
 iptables -t mangle -A XRAY_MASK -j RETURN -m mark --mark 0xff
 iptables -t mangle -A XRAY_MASK -p udp -j MARK --set-mark 1
 iptables -t mangle -A XRAY_MASK -p tcp -j MARK --set-mark 1
+# no need for output chain
 iptables -t mangle -A OUTPUT -j XRAY_MASK
 
 # 代理网关本机 v6
