@@ -338,6 +338,7 @@ iptables -t mangle -A XRAY -d 255.255.255.255/32 -j RETURN
 iptables -t mangle -A XRAY -d 192.168.0.0/16 -p tcp -j RETURN
 iptables -t mangle -A XRAY -d 192.168.0.0/16 -p udp ! --dport 53 -j RETURN
 iptables -t mangle -A XRAY -j RETURN -m mark --mark 0xff
+iptables -t mangle -A XRAY -j RETURN -i lo -m mark ! --mark 0x1 # only allow loopback data from OUTPUT chain
 iptables -t mangle -A XRAY -p udp -j TPROXY --on-ip 127.0.0.1 --on-port 12345 --tproxy-mark 1
 iptables -t mangle -A XRAY -p tcp -j TPROXY --on-ip 127.0.0.1 --on-port 12345 --tproxy-mark 1
 iptables -t mangle -A PREROUTING -j XRAY
@@ -349,6 +350,7 @@ ip6tables -t mangle -A XRAY6 -d fe80::/10 -j RETURN
 ip6tables -t mangle -A XRAY6 -d fd00::/8 -p tcp -j RETURN
 ip6tables -t mangle -A XRAY6 -d fd00::/8 -p udp ! --dport 53 -j RETURN
 ip6tables -t mangle -A XRAY6 -j RETURN -m mark --mark 0xff
+ip6tables -t mangle -A XRAY6 -j RETURN -i lo -m mark ! --mark 0x1 # only allow loopback data from OUTPUT chain
 ip6tables -t mangle -A XRAY6 -p udp -j TPROXY --on-ip ::1 --on-port 12345 --tproxy-mark 1
 ip6tables -t mangle -A XRAY6 -p tcp -j TPROXY --on-ip ::1 --on-port 12345 --tproxy-mark 1
 ip6tables -t mangle -A PREROUTING -j XRAY6
